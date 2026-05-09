@@ -1,3 +1,26 @@
+# Team Details
+
+## Project Title
+WasteChain - Smart Recycling Traceability Platform
+
+## Team Members
+- Pushpinder Singh â€“ 2210990693
+- Narinder Singh â€“ 2210990598
+- Lokesh Vaid â€“ 2210990545
+- Nipun Kumar â€“ 2210990615
+
+## Project Type
+Copyright.
+
+## Team Details
+Department: CSE  
+University: Chitkara University
+
+## Current Status
+Completed
+
+
+
 # WasteChain - Smart Recycling Traceability Platform
 
 WasteChain is a full-stack traceability platform for recyclable waste management. It connects citizens, collectors, recyclers, and admins with photo-backed submissions, AI-assisted classification, QR tracking, realtime updates, and blockchain-style audit logs.
@@ -163,62 +186,62 @@ Open the frontend at: `http://localhost:3000`
 ```
 wastechain/
 +-- backend/
-¦   +-- controllers/
-¦   ¦   +-- adminController.js
-¦   ¦   +-- aiController.js
-¦   ¦   +-- authController.js
-¦   ¦   +-- wasteController.js
-¦   +-- middleware/
-¦   ¦   +-- auth.js
-¦   ¦   +-- upload.js
-¦   +-- models/
-¦   ¦   +-- TraceabilityLog.js
-¦   ¦   +-- User.js
-¦   ¦   +-- WasteSubmission.js
-¦   +-- routes/
-¦   ¦   +-- admin.js
-¦   ¦   +-- ai.js
-¦   ¦   +-- auth.js
-¦   ¦   +-- waste.js
-¦   +-- uploads/
-¦   +-- .env
-¦   +-- package.json
-¦   +-- server.js
-¦
+Â¦   +-- controllers/
+Â¦   Â¦   +-- adminController.js
+Â¦   Â¦   +-- aiController.js
+Â¦   Â¦   +-- authController.js
+Â¦   Â¦   +-- wasteController.js
+Â¦   +-- middleware/
+Â¦   Â¦   +-- auth.js
+Â¦   Â¦   +-- upload.js
+Â¦   +-- models/
+Â¦   Â¦   +-- TraceabilityLog.js
+Â¦   Â¦   +-- User.js
+Â¦   Â¦   +-- WasteSubmission.js
+Â¦   +-- routes/
+Â¦   Â¦   +-- admin.js
+Â¦   Â¦   +-- ai.js
+Â¦   Â¦   +-- auth.js
+Â¦   Â¦   +-- waste.js
+Â¦   +-- uploads/
+Â¦   +-- .env
+Â¦   +-- package.json
+Â¦   +-- server.js
+Â¦
 +-- frontend/
-¦   +-- src/
-¦   ¦   +-- components/
-¦   ¦   ¦   +-- Button.jsx
-¦   ¦   ¦   +-- Card.jsx
-¦   ¦   ¦   +-- ConfirmationModal.jsx
-¦   ¦   ¦   +-- Navbar.jsx
-¦   ¦   ¦   +-- Sidebar.jsx
-¦   ¦   +-- context/
-¦   ¦   ¦   +-- AuthContext.jsx
-¦   ¦   +-- pages/
-¦   ¦   ¦   +-- AdminAnalytics.jsx
-¦   ¦   ¦   +-- AdminDashboard.jsx
-¦   ¦   ¦   +-- AdminLogsPage.jsx
-¦   ¦   ¦   +-- AdminUsersPage.jsx
-¦   ¦   ¦   +-- CollectorDashboard.jsx
-¦   ¦   ¦   +-- CitizenDashboard.jsx
-¦   ¦   ¦   +-- IncomingWastePage.jsx
-¦   ¦   ¦   +-- LoginPage.jsx
-¦   ¦   ¦   +-- MyCollectionsPage.jsx
-¦   ¦   ¦   +-- MySubmissionsPage.jsx
-¦   ¦   ¦   +-- ProfilePage.jsx
-¦   ¦   ¦   +-- RegisterPage.jsx
-¦   ¦   ¦   +-- RewardsPage.jsx
-¦   ¦   ¦   +-- SubmitWastePage.jsx
-¦   ¦   ¦   +-- TrackWastePage.jsx
-¦   ¦   ¦   +-- TermsPage.jsx
-¦   ¦   ¦   +-- more pages...
-¦   ¦   +-- services/
-¦   ¦   ¦   +-- api.js
-¦   ¦   +-- App.jsx
-¦   ¦   +-- main.jsx
-¦   +-- package.json
-¦   +-- postcss.config.js
-¦   +-- tailwind.config.js
-¦   +-- vite.config.js
+Â¦   +-- src/
+Â¦   Â¦   +-- components/
+Â¦   Â¦   Â¦   +-- Button.jsx
+Â¦   Â¦   Â¦   +-- Card.jsx
+Â¦   Â¦   Â¦   +-- ConfirmationModal.jsx
+Â¦   Â¦   Â¦   +-- Navbar.jsx
+Â¦   Â¦   Â¦   +-- Sidebar.jsx
+Â¦   Â¦   +-- context/
+Â¦   Â¦   Â¦   +-- AuthContext.jsx
+Â¦   Â¦   +-- pages/
+Â¦   Â¦   Â¦   +-- AdminAnalytics.jsx
+Â¦   Â¦   Â¦   +-- AdminDashboard.jsx
+Â¦   Â¦   Â¦   +-- AdminLogsPage.jsx
+Â¦   Â¦   Â¦   +-- AdminUsersPage.jsx
+Â¦   Â¦   Â¦   +-- CollectorDashboard.jsx
+Â¦   Â¦   Â¦   +-- CitizenDashboard.jsx
+Â¦   Â¦   Â¦   +-- IncomingWastePage.jsx
+Â¦   Â¦   Â¦   +-- LoginPage.jsx
+Â¦   Â¦   Â¦   +-- MyCollectionsPage.jsx
+Â¦   Â¦   Â¦   +-- MySubmissionsPage.jsx
+Â¦   Â¦   Â¦   +-- ProfilePage.jsx
+Â¦   Â¦   Â¦   +-- RegisterPage.jsx
+Â¦   Â¦   Â¦   +-- RewardsPage.jsx
+Â¦   Â¦   Â¦   +-- SubmitWastePage.jsx
+Â¦   Â¦   Â¦   +-- TrackWastePage.jsx
+Â¦   Â¦   Â¦   +-- TermsPage.jsx
+Â¦   Â¦   Â¦   +-- more pages...
+Â¦   Â¦   +-- services/
+Â¦   Â¦   Â¦   +-- api.js
+Â¦   Â¦   +-- App.jsx
+Â¦   Â¦   +-- main.jsx
+Â¦   +-- package.json
+Â¦   +-- postcss.config.js
+Â¦   +-- tailwind.config.js
+Â¦   +-- vite.config.js
 ```
