@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { wasteAPI } from '../services/api';
+import { socket } from '../services/api';
 import { Package, User, Clock, CheckCircle } from 'lucide-react';
 import Card from '../components/Card';
 
@@ -12,6 +13,14 @@ export default function TrackWastePage() {
 
   useEffect(() => {
     loadData();
+  }, [id]);
+
+  // Auto-refresh when this specific waste status changes
+  useEffect(() => {
+    socket.on('wasteStatusUpdate', ({ wasteId }) => {
+      if (wasteId === id) loadData();
+    });
+    return () => socket.off('wasteStatusUpdate');
   }, [id]);
 
   const loadData = async () => {

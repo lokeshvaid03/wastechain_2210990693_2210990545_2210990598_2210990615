@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { wasteAPI } from '../services/api';
+import { socket } from '../services/api';
 import { QrCode, Eye, Trash2, Calendar, Weight, Search } from 'lucide-react';
 import Card from '../components/Card';
 import Sidebar from '../components/Sidebar';
@@ -20,6 +21,12 @@ export default function MySubmissionsPage() {
 
   useEffect(() => {
     loadSubmissions();
+  }, []);
+
+  // Auto-refresh when status update received via socket
+  useEffect(() => {
+    socket.on('wasteStatusUpdate', () => loadSubmissions());
+    return () => socket.off('wasteStatusUpdate');
   }, []);
 
   const loadSubmissions = async () => {

@@ -211,11 +211,14 @@ exports.updateWasteStatus = async (req, res) => {
         // Real-time notification to waste owner
         const io = req.app.get('io');
         if (io) {
+          // Notify the citizen who owns this waste
           io.to(waste.userId.toString()).emit('wasteStatusUpdate', {
             wasteId: waste.wasteId,
             status,
             message: `Your waste ${waste.wasteId} status updated to: ${status}`
           });
+          // Broadcast to all connected users (collectors, recyclers, admins)
+          io.emit('wasteUpdated', { wasteId: waste.wasteId, status });
         }
       }
 

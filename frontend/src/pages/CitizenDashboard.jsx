@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { wasteAPI, authAPI } from '../services/api';
+import { socket } from '../services/api';
 import { Trash2, Award, TrendingUp, Package, BarChart, ExternalLink } from 'lucide-react';
 import { Bar, BarChart as ReBarChart, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import Card from '../components/Card';
@@ -16,6 +17,12 @@ export default function CitizenDashboard() {
   useEffect(() => {
     if (user) loadData();
   }, [user]);
+
+  // Auto-refresh when status update received via socket
+  useEffect(() => {
+    socket.on('wasteStatusUpdate', () => loadData());
+    return () => socket.off('wasteStatusUpdate');
+  }, []);
 
   const loadData = async () => {
     try {

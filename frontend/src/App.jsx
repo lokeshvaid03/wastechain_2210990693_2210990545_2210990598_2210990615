@@ -51,6 +51,7 @@ function DashboardRouter() {
   const { user } = useAuth();
   if (user?.role === 'collector') return <CollectorDashboard />;
   if (user?.role === 'admin') return <AdminDashboard />;
+  if (user?.role === 'recycler') return <IncomingWastePage />;
   return <CitizenDashboard />;
 }
 

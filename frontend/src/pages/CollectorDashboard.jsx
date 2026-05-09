@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { wasteAPI } from '../services/api';
+import { socket } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { Truck, MapPin, Phone, CheckCircle, Package, DollarSign, ExternalLink } from 'lucide-react';
 import Card from '../components/Card';
@@ -19,6 +20,11 @@ export default function CollectorDashboard() {
   useEffect(() => {
     if(user) loadData();
   }, [user]);
+
+  useEffect(() => {
+    socket.on('wasteUpdated', () => loadData());
+    return () => socket.off('wasteUpdated');
+  }, []);
 
   const loadData = async () => {
     try {

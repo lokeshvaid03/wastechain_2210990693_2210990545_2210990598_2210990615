@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { adminAPI } from '../services/api';
+import { socket } from '../services/api';
 import { Users, Trash2, TrendingUp, Award, ArrowRight, FileText } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import Card from '../components/Card';
@@ -15,6 +16,13 @@ export default function AdminDashboard() {
       .then(({ data }) => setAnalytics(data))
       .catch(() => toast.error('Failed to load dashboard'))
       .finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    socket.on('wasteUpdated', () => {
+      adminAPI.getAnalytics().then(({ data }) => setAnalytics(data)).catch(() => {});
+    });
+    return () => socket.off('wasteUpdated');
   }, []);
 
   const stats = [

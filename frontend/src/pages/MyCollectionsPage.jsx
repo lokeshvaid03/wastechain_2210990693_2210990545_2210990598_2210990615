@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { wasteAPI } from '../services/api';
+import { socket } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { Eye, Calendar, Weight } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
@@ -28,6 +29,17 @@ export default function MyCollectionsPage() {
       finally { setLoading(false); }
     };
     if (user) load();
+  }, [user]);
+
+  useEffect(() => {
+    socket.on('wasteUpdated', async () => {
+      if (!user) return;
+      try {
+        const { data } = await wasteAPI.getAll({ collectorId: user._id, page: 1, limit: 50 });
+        setCollections(data.waste || data);
+      } catch {}
+    });
+    return () => socket.off('wasteUpdated');
   }, [user]);
 
   return (

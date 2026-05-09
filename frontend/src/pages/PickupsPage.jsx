@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { wasteAPI } from '../services/api';
+import { socket } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { MapPin, Phone, Package } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
@@ -14,6 +15,11 @@ export default function PickupsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => { load(); }, []);
+
+  useEffect(() => {
+    socket.on('wasteUpdated', () => load());
+    return () => socket.off('wasteUpdated');
+  }, []);
 
   const load = async () => {
     try {

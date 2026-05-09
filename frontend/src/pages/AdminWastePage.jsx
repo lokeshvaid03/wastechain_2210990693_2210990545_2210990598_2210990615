@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { wasteAPI } from '../services/api';
+import { socket } from '../services/api';
 import { Eye, Search } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import Card from '../components/Card';
@@ -19,6 +20,11 @@ export default function AdminWastePage() {
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => { load(); }, [page, filterStatus, filterCategory, search]);
+
+  useEffect(() => {
+    socket.on('wasteUpdated', () => load());
+    return () => socket.off('wasteUpdated');
+  }, []);
 
   const load = async () => {
     setLoading(true);
