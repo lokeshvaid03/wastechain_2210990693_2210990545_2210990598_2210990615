@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { adminAPI } from '../services/api';
+import { socket } from '../services/api';
 import { BarChart, Bar, PieChart, Pie, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell, ResponsiveContainer } from 'recharts';
 import { TrendingUp, Users, Trash2, Award, Download } from 'lucide-react';
 import Card from '../components/Card';
@@ -24,6 +25,11 @@ export default function AdminAnalytics() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    socket.on('wasteUpdated', () => loadAnalytics());
+    return () => socket.off('wasteUpdated');
+  }, []);
 
   const handleExportCSV = async () => {
     try {

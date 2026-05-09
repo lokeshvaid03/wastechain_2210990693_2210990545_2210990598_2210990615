@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { adminAPI } from '../services/api';
+import { socket } from '../services/api';
 import { Clock, User, Hash } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import Card from '../components/Card';
@@ -14,6 +15,11 @@ export default function AdminLogsPage() {
       .then(({ data }) => setLogs(data))
       .catch(() => toast.error('Failed to load logs'))
       .finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    socket.on('wasteUpdated', () => adminAPI.getAllLogs().then(({ data }) => setLogs(data)).catch(() => {}));
+    return () => socket.off('wasteUpdated');
   }, []);
 
   return (

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { authAPI } from '../services/api';
+import { socket } from '../services/api';
 import { Award, Trophy, Star, Target } from 'lucide-react';
 import Card from '../components/Card';
 import Sidebar from '../components/Sidebar';
@@ -10,6 +11,11 @@ export default function RewardsPage() {
 
   useEffect(() => {
     authAPI.getProfile().then(({ data }) => setUser(data)).catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    socket.on('wasteStatusUpdate', () => authAPI.getProfile().then(({ data }) => setUser(data)).catch(() => {}));
+    return () => socket.off('wasteStatusUpdate');
   }, []);
 
   const levels = [
