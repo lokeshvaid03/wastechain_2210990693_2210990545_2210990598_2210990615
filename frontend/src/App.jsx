@@ -12,6 +12,7 @@ import SubmitWastePage from './pages/SubmitWastePage';
 import MySubmissionsPage from './pages/MySubmissionsPage';
 import TrackWastePage from './pages/TrackWastePage';
 import RewardsPage from './pages/RewardsPage';
+import LeaderboardPage from './pages/LeaderboardPage';
 import AdminAnalytics from './pages/AdminAnalytics';
 import AboutPage from './pages/AboutPage';
 import FeaturesPage from './pages/FeaturesPage';
@@ -105,6 +106,14 @@ function App() {
               element={
                 <ProtectedRoute allowedRoles={['citizen']}>
                   <RewardsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/leaderboard"
+              element={
+                <ProtectedRoute allowedRoles={['citizen']}>
+                  <LeaderboardPage />
                 </ProtectedRoute>
               }
             />

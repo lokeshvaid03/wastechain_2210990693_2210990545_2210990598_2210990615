@@ -43,14 +43,19 @@ export default function SubmitWastePage() {
       formData.append('image', image);
       
       const { data } = await aiAPI.analyzeImage(formData);
-      setAiPrediction(data.prediction);
-      
+      setAiPrediction({ ...data.prediction, _note: data.note || null });
+
       if (data.prediction.type && categories.includes(data.prediction.type)) {
         setFormData(prev => ({ ...prev, category: data.prediction.type }));
       }
     } catch (error) {
-      console.error('AI detection error:', error);
-      toast.error('AI analysis failed. Please try again or enter details manually.');
+      console.error('AI detection error:', error.response?.data || error.message);
+      // Even on error, try to show something useful
+      if (error.response?.status === 401) {
+        toast.error('Session expired. Please log in again.');
+      } else {
+        toast.error(error.response?.data?.message || 'AI analysis failed. Please try again.');
+      }
     } finally {
       setAnalyzing(false);
     }
@@ -149,6 +154,11 @@ export default function SubmitWastePage() {
                           <X className="w-5 h-5"/>
                         </button>
                       </div>
+                      {aiPrediction._note && (
+                        <p className="text-xs text-yellow-700 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700 rounded-lg px-3 py-2">
+                          ⚠️ {aiPrediction._note}
+                        </p>
+                      )}
                       
                       <div className="flex items-center space-x-3">
                         <Info className="w-5 h-5 text-green-600 dark:text-green-400"/>

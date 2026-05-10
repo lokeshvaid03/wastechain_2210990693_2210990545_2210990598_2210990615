@@ -29,6 +29,13 @@ export const authAPI = {
     return api.put('/auth/profile', form, { headers: { 'Content-Type': 'multipart/form-data' } });
   },
   changePassword: (data) => api.put('/auth/change-password', data),
+  getLeaderboard: () => api.get('/auth/leaderboard'),
+};
+
+// Rewards API
+export const rewardsAPI = {
+  getRewards: () => api.get('/rewards'),
+  redeem: (id) => api.post(`/rewards/${id}/redeem`),
 };
 
 
