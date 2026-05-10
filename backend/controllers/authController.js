@@ -129,6 +129,19 @@ exports.updateProfile = async (req, res) => {
   }
 };
 
+// Leaderboard
+exports.getLeaderboard = async (req, res) => {
+  try {
+    const users = await User.find({ role: 'citizen' })
+      .select('name points level badges')
+      .sort({ points: -1 })
+      .limit(20);
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // Change password
 exports.changePassword = async (req, res) => {
   try {

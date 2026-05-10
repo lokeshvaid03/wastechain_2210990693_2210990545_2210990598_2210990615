@@ -17,8 +17,9 @@ app.set('io', io);
 // Rate limiting on auth routes
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: process.env.NODE_ENV === 'development' ? 100 : 20,
-  message: { message: 'Too many attempts, please try again after 15 minutes' }
+  max: process.env.NODE_ENV === 'development' ? 1000 : 100,
+  message: { message: 'Too many attempts, please try again after 15 minutes' },
+  skip: () => process.env.NODE_ENV === 'development',
 });
 
 // Middleware
@@ -41,6 +42,10 @@ app.use('/api/auth', authLimiter, require('./routes/auth'));
 app.use('/api/waste', require('./routes/waste'));
 app.use('/api/ai', require('./routes/ai'));
 app.use('/api/admin', require('./routes/admin'));
+app.use('/api/rewards', require('./routes/reward'));
+
+// Seed default rewards
+require('./controllers/rewardController').seedRewards();
 
 // Health check
 app.get('/api/health', (req, res) => {
